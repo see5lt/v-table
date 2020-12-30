@@ -1,0 +1,705 @@
+$border-color:#ccc; //边框颜色
+$header-bgColor:#F2F2F2; //头部背景颜色
+$footer-bgColor:none; //页脚背景颜色
+$headerAndFooter-height:36px; //头部与页脚高度
+$paging-bgColor:none; //分页背景颜色
+$paging-active-bgColor:#458cde; //分页选中时的颜色
+$row-click-hover:#fff1e3; //鼠标经过行的颜色
+$row-click-color:#fff1e3; //鼠标点击行的颜色
+$tips-bgColor:#F1355E; //提示的背景颜色
+
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.dy-bar {
+  color: #428bca;
+  text-decoration: none;
+  position: relative;
+
+ ul{
+    display: none;
+    position: absolute;
+    line-height: 30px;
+    padding: 5px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12);
+    border: 1px solid #d2d2d2;
+    background-color: #fff;
+    border-radius: 2px;
+    white-space: nowrap;
+    width: 100%;
+    min-width: 80px;
+    top: 20px;
+    opacity: 1 !important;
+    right: -28px;
+    color: #666666;
+    z-index:100000;
+    margin:0;
+    li{
+      margin: 0;
+      position: relative;
+      text-align: center;
+      &:hover{
+        background: #f5f5f5;
+      }
+      a{
+        color: #666666;
+        text-decoration: none;
+      }
+    }
+    .dy-bar:hover{
+      color: red;
+      // background-color: #0e8dea;
+    }
+    .dy-bar:hover ul{
+      display: block;
+    }
+  }
+}
+.dy-bar:hover ul {
+  display: block;
+}
+.dy-grid {
+  font-size: 14px;
+  font-family: "微软雅黑";
+  height: "100%";
+  border: 1px solid #ccc;
+  overflow: hidden;
+
+  // 标题
+  .dy-grid-title {
+    height: 36px;
+    line-height: 36px;
+    background: $header-bgColor;
+    padding: 0 10px;
+    display: flex;
+
+    .dy-grid-refresh__btn {
+      cursor: pointer;
+      font-size: 18px;
+      margin-right: 10px;
+      padding-top: 2px;
+    }
+
+    .dy-grid-title__left {
+      float: left;
+      min-width: 90px;
+    }
+
+    .dy-grid-title__center {
+      float: left;
+      height: 100%;
+      flex: 1;
+    }
+
+    .dy-grid-title__right {
+      float: right;
+      height: 100%;
+    }
+  }
+
+  //内容 - 开始
+  .dy-grid-content {
+    height: calc(100% - 108px);
+    overflow: hidden;
+    position: relative;
+
+    .dy-grid__header {
+      min-height: $headerAndFooter-height;
+      overflow: hidden;
+      border-top: 1px solid $border-color;
+      background: #f3f5fa;
+
+      .dy-grid__table>thead>tr>th {
+        cursor: pointer;
+      }
+    }
+
+    .dy-grid__body {
+      height: calc(100% - #{$headerAndFooter-height + 2});
+      overflow: auto;
+      min-height: 80px;
+
+      .dy-grid__loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background: url(data:image/gif;base64,R0lGODlhJQAlAJECAL3L2AYrTv///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAJQAlAAACi5SPqcvtDyGYIFpF690i8xUw3qJBwUlSadmcLqYmGQu6KDIeM13beGzYWWy3DlB4IYaMk+Dso2RWkFCfLPcRvFbZxFLUDTt21BW56TyjRep1e20+i+eYMR145W2eefj+6VFmgTQi+ECVY8iGxcg35phGo/iDFwlTyXWphwlm1imGRdcnuqhHeop6UAAAIfkEBQoAAgAsEAACAAQACwAAAgWMj6nLXAAh+QQFCgACACwVAAUACgALAAACFZQvgRi92dyJcVJlLobUdi8x4bIhBQAh+QQFCgACACwXABEADAADAAACBYyPqcsFACH5BAUKAAIALBUAFQAKAAsAAAITlGKZwWoMHYxqtmplxlNT7ixGAQAh+QQFCgACACwQABgABAALAAACBYyPqctcACH5BAUKAAIALAUAFQAKAAsAAAIVlC+BGL3Z3IlxUmUuhtR2LzHhsiEFACH5BAUKAAIALAEAEQAMAAMAAAIFjI+pywUAIfkEBQoAAgAsBQAFAAoACwAAAhOUYJnAagwdjGq2amXGU1PuLEYBACH5BAUKAAIALBAAAgAEAAsAAAIFhI+py1wAIfkEBQoAAgAsFQAFAAoACwAAAhWUL4AIvdnciXFSZS6G1HYvMeGyIQUAIfkEBQoAAgAsFwARAAwAAwAAAgWEj6nLBQAh+QQFCgACACwVABUACgALAAACE5RgmcBqDB2MarZqZcZTU+4sRgEAIfkEBQoAAgAsEAAYAAQACwAAAgWEj6nLXAAh+QQFCgACACwFABUACgALAAACFZQvgAi92dyJcVJlLobUdi8x4bIhBQAh+QQFCgACACwBABEADAADAAACBYSPqcsFADs=) no-repeat center;
+
+        .dy-grid__loading_git {
+          width: 100%;
+          height: 100%;
+          opacity: 0.1;
+          background: #000000;
+        }
+      }
+
+      .dy-grid__hint {
+        position: absolute;
+        height: 50px;
+        line-height: 50px;
+        top: 50%;
+        margin-top: -15px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        text-align: center;
+        color: #a6a6a6;
+      }
+    }
+
+    .dy-grid__footer {
+      background: $footer-bgColor;
+      height: $headerAndFooter-height;
+      border-top: 1px solid $border-color;
+      overflow: hidden;
+    }
+
+    .dy-grid__table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      table-layout: fixed;
+
+      // 所有
+      >tbody>tr>td,
+      >thead>tr>th {
+        border-bottom: 1px solid $border-color;
+        overflow: hidden;
+        position: relative;
+
+        .cell {
+          box-sizing: border-box;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 100%;
+          max-width: 100%;
+
+          &.space {
+            white-space: initial;
+          }
+
+          .dy-grid-img {
+            width: 100%;
+            float: left;
+            cursor: pointer;
+          }
+        }
+
+        .dy-edit-link {
+          color: #428bca;
+          text-decoration: underline;
+        }
+
+        select.dy-edit {
+          line-height: 24px;
+        }
+
+        .dy-edit {
+          font-size: 14px;
+          width: calc(100% - 6px);
+          position: absolute;
+          height: calc(100% - 6px);
+          left: 3px;
+          top: 3px;
+          border: 1px solid $border-color;
+          padding: 0 3px;
+          background-color: none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+          }
+
+          &[disabled] {
+            background: none;
+            border: none;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -ms-appearance: none;
+            pointer-events: none;
+          }
+
+          &[align="left"] {
+            text-align: left;
+          }
+
+          &[align="center"] {
+            text-align: center;
+          }
+
+          &[align="right"] {
+            text-align: right;
+          }
+
+          &:not([disabled]):hover {
+            border: 1px solid #2d8eff;
+            background-color: #FFF;
+          }
+
+          &:focus {
+            outline: none;
+            border: none;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-user-modify: read-write-plaintext-only;
+            border: 1px solid rgba(205, 205, 205, 0);
+            box-shadow: 0 0 1px 1px #2d8eff;
+            background-color: #FFF;
+          }
+        }
+
+        .dy_table_lookup {
+          display: flex;
+          padding: 0;
+          width: calc(100% - 6px);
+          position: absolute;
+          height: calc(100% - 6px);
+          left: 3px;
+          top: 3px;
+
+          >input {
+            cursor: auto;
+            font-size: 14px;
+            height: 100%;
+            top: 0;
+            width: calc(100% - 6px);
+            padding: 0 3px;
+            position: relative;
+
+            &:focus {
+              outline: none !important;
+              border: none !important;
+              box-shadow: 0 !important;
+              -webkit-tap-highlight-color: none !important;
+            }
+
+            &[disabled] {
+              background: none;
+              border: none;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              appearance: none;
+              -moz-appearance: none;
+              -webkit-appearance: none;
+              -ms-appearance: none;
+              pointer-events: none;
+
+              &~a {
+                display: none;
+              }
+            }
+          }
+
+          >a {
+            padding: 9px 5px;
+            padding-bottom: 10px;
+            cursor: pointer;
+            color: #458cde;
+            border: 1px solid $border-color;
+            border-left: none;
+            line-height: 2px;
+            font-size: 22px;
+            background: #fff;
+          }
+        }
+
+        .checkbox-label {
+          height: 100%;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        .checkbox {
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+        }
+
+        &[hide='true'],
+        &[rowspan='0'] {
+          display: none;
+        }
+      }
+
+      // 头部和底部
+      >thead>tr>th {
+        border-left: 1px solid $border-color;
+        height: $headerAndFooter-height;
+        font-weight: 500;
+
+        .cell {
+          padding: 5px;
+        }
+
+        // 排序
+        .dy-table-sort {
+          width: 10px;
+          cursor: pointer !important;
+          position: relative;
+          vertical-align: top;
+          height: 100%;
+
+          .dy-edge {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-width: 6px;
+            border-style: dashed;
+            border-color: transparent;
+            position: absolute;
+            left: 5px;
+            border-width: 5px;
+          }
+
+          .dy-table-sort-asc {
+            top: 3px;
+            border-top: none;
+            border-bottom-style: solid;
+            border-bottom-color: #b2b2b2;
+
+            &:hover {
+              border-bottom-color: #666;
+            }
+          }
+
+          .dy-table-sort-desc {
+            bottom: 4px;
+            border-bottom: none;
+            border-top-style: solid;
+            border-top-color: #b2b2b2;
+
+            &:hover {
+              border-top-color: #666;
+            }
+          }
+
+          &[sl-sort=asc] .dy-table-sort-asc {
+            border-bottom-color: #458cde;
+          }
+
+          &[sl-sort=desc] .dy-table-sort-desc {
+            border-top-color: #458cde;
+          }
+        }
+      }
+
+      //内容
+      >tbody>tr.dy-table__row {
+        >td {
+          min-width: 0;
+          box-sizing: border-box;
+          vertical-align: middle;
+          line-height: 2;
+
+          .cell {
+            padding: 1px 5px;
+            min-height: 30px;
+          }
+
+          &[rowspan] {
+            border-left: 1px solid $border-color;
+          }
+
+          &[rowspan="1"] {
+            border-left: none;
+            border-right: none;
+          }
+
+          &[rowspan="0"]+[rowspan="1"],
+          &:not([rowspan="1"])+[rowspan="1"] {
+            border-left: 1px solid $border-color;
+          }
+        }
+
+        &.hover-row>td {
+          // 鼠标经过行
+          background: $row-click-hover;
+        }
+
+        &.current-row>td {
+          // 当前选中行
+          background: $row-click-color;
+        }
+
+        &.empty {
+
+          // 空数据行
+          >td {
+            border-bottom: none;
+            text-align: center;
+            border: none;
+          }
+
+          &:hover {
+            background: none;
+          }
+        }
+
+        &[striped="true"] {
+          // 斑马纹
+          background: #FAFAFA;
+        }
+      }
+
+      //-拖动
+      &.cellResize>thead>tr>th .colResize {
+        width: 5px;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: col-resize;
+        z-index: 1;
+      }
+
+      //- 自动高
+      &.autoHeight>thead>tr>th {
+        height: auto;
+      }
+    }
+
+    //底部去掉边框
+    .dy-grid__footer .dy-grid__table>thead>tr>th {
+      border-left: none;
+    }
+
+    //纵向边框
+    &[style-border="true"] .dy-grid__table>tbody>tr.dy-table__row>td[rowspan="1"],
+    &[style-border="true"] .dy-grid__table>thead>tr>th {
+      border-left: 1px solid $border-color;
+    }
+
+    // 拖动线
+    .dy-table__resize-proxy {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      border-left: 1px solid #dcdcdc;
+      z-index: 110;
+    }
+
+    // 冻结列
+    .dy-grid__fixed {
+      position: absolute;
+      top: 0;
+      height: 90%;
+      width: 0px;
+      background: #ffffff;
+      z-index: 1;
+
+      .dy-grid__body {
+        min-height: 0px;
+      }
+
+      &.shadow {
+        box-shadow: 0 0 10px rgba(0, 0, 0, .12);
+      }
+
+      &.left {
+        left: 0;
+
+        .dy-grid__body {
+          overflow: hidden;
+          overflow-y: auto;
+          overflow-y: hidden \9;
+
+          &::-webkit-scrollbar {
+            width: 0px;
+          }
+        }
+      }
+
+      &.right {
+        right: 0;
+
+        .dy-grid__table>thead>tr>th {
+          border-left: 1px solid $border-color;
+        }
+
+        .dy-grid__table>tbody>tr.dy-table__row>td {
+          border-right: none !important;
+        }
+
+        .dy-grid__body {
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+      }
+    }
+
+    // 冻结列 - 汇总行
+    .dy-grid__footer__fixed {
+      position: absolute;
+      bottom: 0;
+      height: 39px;
+      width: 0px;
+      background: #ffffff;
+
+      &.shadow {
+        box-shadow: 0 0 10px rgba(0, 0, 0, .12);
+      }
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+
+        .dy-grid__table>thead>tr>th {
+          border-left: 1px solid $border-color;
+          border-right: none !important;
+        }
+      }
+    }
+  }
+
+  //内容 - 结束
+
+
+  // 分页-开始
+  .dy-grid-paging {
+    height: 36px;
+    line-height: 36px;
+    border-top: 1px solid #ccc;
+    background: $paging-bgColor;
+    padding: 0 10px;
+    overflow: hidden;
+    text-align: left;
+    -webkit-user-select: none;
+    font-family: arial;
+    color: #48576a;
+
+    .page-total {
+      float: left;
+    }
+
+    .page-ul {
+      display: inline-block;
+      margin: 0px 10px;
+      padding: 0;
+      overflow: hidden;
+      padding-top: 5px;
+      float: left;
+
+      li {
+        float: left;
+        display: inline-block;
+        margin: 0;
+        padding: 0 4px;
+        border-right: 0;
+        background: none;
+        font-size: 14px;
+        min-width: 28px;
+        height: 26px;
+        line-height: 26px;
+        cursor: pointer;
+        box-sizing: border-box;
+        text-align: center;
+
+        &:hover {
+          color: #20a0ff;
+        }
+
+        &.active {
+          border-color: $paging-active-bgColor;
+          background-color: $paging-active-bgColor;
+          color: #fff;
+          cursor: default;
+        }
+
+        &.active:hover {
+          color: #fff;
+        }
+
+        &.disabled {
+          cursor: not-allowed;
+          color: #e4e4e4;
+        }
+
+        &.dot {
+          cursor: default;
+        }
+      }
+    }
+
+    .page-select {
+      border: 1px solid #d1dbe5;
+      margin: 0;
+      float: left;
+      height: 26px;
+      line-height: 26px;
+      margin-top: 5px;
+    }
+
+    .page-search {
+      float: right;
+
+      .pager-search-input {
+        height: 18px;
+        width: 40px;
+        line-height: 20px;
+        margin: 0 5px;
+        padding: 0;
+        text-align: center;
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      .pager-search-btn {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        text-decoration: none;
+        background-color: #458CDE;
+        border-color: #458CDE;
+        margin-left: 5px;
+        height: 22px;
+        line-height: 20px;
+        padding: 0 10px;
+        color: #fff;
+
+        &:hover {
+          background-color: #2D67AA;
+          border-color: #458CDE;
+        }
+      }
+    }
+  }
+
+  // 分页-结束
+
+}
