@@ -96,6 +96,7 @@ export default {
 		handleClick(evt) {
 			if(!this.disabled){
 				this.$emit('click', evt);
+				
 			}
 		},
     _mouseover(e){

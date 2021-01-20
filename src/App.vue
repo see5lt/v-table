@@ -1,7 +1,48 @@
 <template>
 	<div id="app" >
-      
-    <div style="height:600px;width:1000px;margin:20px auto">
+    <div style="height:500px;width:1000px;position:absolute;left:30px;top:20px">
+       <v-form
+       ref="form"
+       id="form"
+       >
+       <template slot="buttons">
+           <v-button type="primary" text="保存"  @click="save" />
+           <v-button type="primary" text="保存&关闭"  />
+       </template>
+       <template slot="headHtml">
+          <div style="height: 100%;overflow: hidden;">标题2131231313</div>
+       </template>
+       <template slot="cells"> 
+            <tab title="信息">
+                <section title="基本信息">
+                    <cells titlewidth="100" cols="4">
+                        <cell type="text" title="项目编码" field="code" req="false"  col="2"></cell>
+                        <cell type="number" title="参数"   field="number" req="true" col="2"></cell>
+                    </cells>
+                </section>
+                <section title="项目指标">
+                    <cells titlewidth="100" cols="4">
+                        <cell type="text" title="改造实施范围拆除占地面积" field="code" col="1"></cell>
+                        <cell type="date" title="改造实施范围拆除建筑面积"   field="number" col="1"></cell>
+                    </cells>
+                </section>
+                <section title="项目团队">
+                    <cells titlewidth="100" cols="4">
+                        <cell type="text" title="项目编码"  field="code" col="1"></cell>
+                        <cell type="number" title="参数"    field="number" col="1"></cell>
+                    </cells>
+                </section>
+                <section title="改造成本核算">
+                    <cells titlewidth="100" cols="4">
+                        <cell type="text" title="基础数据调查费" field="code" col="1"></cell>
+                        <cell type="number" title="片区策划方案编制费"   field="number" col="1"></cell>
+                    </cells>
+                </section>
+           </tab>
+       </template>
+       </v-form>
+    </div>
+    <div style="height:500px;width:800px;position:absolute;right:30px;top:20px;">
       <v-grid ref="grid"
         id="gridDemo"
         :key-name = "'id'"
@@ -94,6 +135,9 @@ export default {
       getData(){	
         console.log(gridDemo.getData()); 
       }, 
+      save() {
+        console.log('save')
+      },
       editRow(i,row){
         console.log(i,row)
       },

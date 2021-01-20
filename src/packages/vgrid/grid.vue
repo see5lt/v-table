@@ -133,8 +133,8 @@ export default {
             let cols = [];
             slotsCols.forEach((col, index) => {
               if ((col && col.tag == "cell") || col.tag == "btn") {
-                if (col.children && col.children[0].tag == "cell") {
-                  col.data.attrs["cols"] = _getFormatSlotCols(col.children);
+                if (col.children && col.children[0].tag == "cell") { 
+                  col.data.attrs["cols"] = _getFormatSlotCols(col.children);    
                 } else if (col.children && col.children[0].tag == "btn") {
                   col.data.attrs["btn"] = _getFormatSlotCols(col.children);
                 }

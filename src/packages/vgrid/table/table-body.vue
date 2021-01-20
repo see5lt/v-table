@@ -138,7 +138,7 @@ export default {
       this.__rowIndex__rowspan = 1; //计算分页索引用
       this.__rightFixedColumnRowKey = null;
       let key = this._createGrid();
-      let html = `<table class="dy-grid__table" style="width:${this.tableWidth};" key="${key}">`;
+      let html = `<table id="dy-grid_hover" class="dy-grid__table" style="width:${this.tableWidth};" key="${key}">`;
       html += this._getColgroupHtml();
       html += "<tbody>";
       if (!this.data[0]) {

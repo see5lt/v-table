@@ -16,10 +16,12 @@ Vue.prototype.$dyConfig = config;
 
 import button from '@/packages/vbutton/index.js';
 import vGrig from '@/packages/vgrid/index.js';
+import vForm from '@/packages/vform/index.js'
 
 const components = [
   button,
-  vGrig
+  vGrig,
+  vForm
 ]
 
 const install = function(Vue, opts = {}) {
@@ -36,5 +38,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   button,
-  vGrig
+  vGrig,
+  vForm
 }

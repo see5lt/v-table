@@ -1,0 +1,128 @@
+.v-form-nav {
+    width: 120px;
+    float: left;
+    height:100%;
+    background: #f2f2f2;
+
+    li {
+        overflow: hidden;
+        a {
+            width: 100%;
+            display: inline-block;
+            line-height: 40px;
+            text-align: center;
+            color: #000;
+        }
+    }
+    .active a {
+        background-color: #fff;
+        color: #f50a0a;   
+    }
+}
+.v-form-content {
+    width: 100%;
+    float: left;
+    height: calc(100% - 36px);
+    overflow: auto;
+}
+.v-form-wrap {
+    width: calc(100% - 120px);
+    float: left;
+    height: 100%;
+    overflow: auto;
+    .v-form-wrap-title {
+        height: 40px;
+        padding-bottom: 5px;
+        line-height: 40px;
+        border-bottom:1px solid #848484;
+        margin: 0 15px;
+    }
+}
+.v-form-wrapContent {
+    height:calc(100% - 40px);
+    margin: 0 15px;
+}
+.v-form-header {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
+    background: #f2f2f2;
+    border-bottom:1px solid #ccc; 
+}
+.v-form-title__left {
+    float: left;
+}
+.v-form-title__center {
+    float: left;
+    margin-left:20px;
+}
+.v-form-item {
+    margin-bottom:14px;
+   
+    display: inline-block;
+
+    .v-form-label {
+        text-align: center;
+        vertical-align: middle;
+        float: left;
+        font-size: 14px;
+        color: #333;
+        height: 34px;
+        // line-height: 34px;
+        padding:0 12px 0 0;
+        box-sizing: border-box;
+        width: 120px;
+    }
+    .v-form-box {
+        width: calc(100% - 120px);
+        height: 34px;
+        line-height: 34px;
+        float: left;
+        .v-form-input {
+            display: inline-block;
+        }
+    }
+}
+.v-input-control {
+    height: 28px;
+    width: 100%;
+    line-height: 28px;
+    border:1px solid #ddd;
+    border-radius: 3px;
+    background-color: none;
+    outline: none;
+    padding: 0 10px;
+    font-size: 14px;
+    overflow: hidden;
+    margin: 3px 0;
+}
+form {
+    padding-top:10px;
+    font-size: 0;
+}
+.orage {
+    color: #FF6100 !important;
+}
+.suffix-text {
+    color: red;
+    padding-left: 20px;
+    white-space: nowrap;
+    // background: url();
+    margin-left: 8px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    font-size: 12px;
+}
+.v-box-info {
+    border:1px solid #ccc;
+    padding: 2px 10px 2px 0;
+    color: #666;
+    position: absolute;
+    line-height: 20px;
+    background-color: #fff;
+    border-radius: 2px;
+    right:0px;
+    top:-30px;
+    display: block;
+}

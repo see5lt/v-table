@@ -17,6 +17,7 @@ $tips-bgColor:#F1355E; //提示的背景颜色
   overflow: hidden;
 }
 
+
 .dy-bar {
   color: #428bca;
   text-decoration: none;
@@ -34,7 +35,7 @@ $tips-bgColor:#F1355E; //提示的背景颜色
     white-space: nowrap;
     width: 100%;
     min-width: 80px;
-    top: 20px;
+    top: 18px;
     opacity: 1 !important;
     right: -28px;
     color: #666666;
@@ -456,7 +457,33 @@ $tips-bgColor:#F1355E; //提示的背景颜色
           background: #FAFAFA;
         }
       }
-
+      >tbody>tr.dy-table__row:nth-last-child(3) {
+        >td {
+           .dy-bar {
+              ul {
+                top:-100px;
+              }
+           }
+        }
+     }
+      >tbody>tr.dy-table__row:nth-last-child(2) {
+         >td {
+            .dy-bar {
+               ul {
+                 top:-100px;
+               }
+            }
+         }
+      }
+      >tbody>tr.dy-table__row:nth-last-child(1) {
+        >td {
+           .dy-bar {
+              ul {
+                top:-100px;
+              }
+           }
+        }
+     }
       //-拖动
       &.cellResize>thead>tr>th .colResize {
         width: 5px;
