@@ -84,8 +84,9 @@ import vFooter from "@/packages/vgrid/footer/footer.vue";
 import vPaging from "@/packages/vgrid/paging/paging.vue";
 import methods from "@/utils/methods.js";
 import config from "@/utils/config.js";
-import { getTotal } from "@/utils/index.js";
+import { getTotal,ajax } from "@/utils/index.js";
 import $ from "jquery";
+
 if (window.Vue) {
   Vue.prototype.$dyMethods = methods;
   Vue.prototype.$dyConfig = config;
@@ -453,7 +454,6 @@ export default {
         this._loadAjax(params);
       } else if (data && typeof data == "object") {
         this.showLoading = true;
-        console.log(data, "data");
         setTimeout((h) => {
           this._updateData(data, data.length);
         }, 10);
@@ -990,16 +990,7 @@ export default {
         Filters: filter || [],
         Model: this.entity,
       };
-      this.ajaxIndex = $.ajax({
-        url: that.url,
-        type: "post",
-        data: params,
-        headers: that.headers,
-        timeout: that.timeout,
-        beforeSend: function (xhr) {
-          that.showLoading = true;
-        },
-        success: function (res) {
+      ajax.post(that.url,params,function(res){
           that.showLoading = false;
           let data = res.Data || [];
           if (res[parseData.code] == 0) {
@@ -1034,21 +1025,66 @@ export default {
             that._updateData([], 0);
             that.errorTips = res[parseData.msg] || "系统错误";
           }
-        },
-        error: function (err, xhr) {
-          if (!that.ajaxIndex || !that.ajaxIndex.isAborted) {
-            let responseText = xhr.responseText || "";
-            let titleIndex1 = responseText.indexOf("<title>", 0) + 7;
-            let titleIndex2 = responseText.indexOf("</title>", 0);
-            let errText =
-              responseText.substring(titleIndex1, titleIndex2) ||
-              xhr.statusText;
-            that.errorTips =
-              "报错信息： " + errText + "，状态码是：" + xhr.status;
-            that.showLoading = false;
-          }
-        },
-      });
+      })
+      // this.ajaxIndex = $.ajax({
+      //   url: that.url,
+      //   type: "post",
+      //   data: params,
+      //   headers: that.headers,
+      //   timeout: that.timeout,
+      //   beforeSend: function (xhr) {
+      //     that.showLoading = true;
+      //   },
+      //   success: function (res) {
+      //     that.showLoading = false;
+      //     let data = res.Data || [];
+      //     if (res[parseData.code] == 0) {
+      //       let data = [],
+      //         total = [],
+      //         summary = [];
+      //       if (parseData.data) {
+      //         data = res;
+      //         parseData.data.split(".").forEach((h) => {
+      //           data = data[h];
+      //         });
+      //       }
+      //       if (parseData.total) {
+      //         total = res;
+      //         parseData.total.split(".").forEach((h) => {
+      //           total = total[h];
+      //         });
+      //       }
+      //       if (parseData.summary) {
+      //         summary = res;
+      //         parseData.summary.split(".").forEach((h) => {
+      //           summary = summary[h];
+      //         });
+      //       }
+      //       if (!Array.isArray(data) || total == undefined) {
+      //         that._updateData([], 0);
+      //         that.errorTips = "格式不匹配";
+      //       } else {
+      //         that._updateData(data, total, summary);
+      //       }
+      //     } else {
+      //       that._updateData([], 0);
+      //       that.errorTips = res[parseData.msg] || "系统错误";
+      //     }
+      //   },
+      //   error: function (err, xhr) {
+      //     if (!that.ajaxIndex || !that.ajaxIndex.isAborted) {
+      //       let responseText = xhr.responseText || "";
+      //       let titleIndex1 = responseText.indexOf("<title>", 0) + 7;
+      //       let titleIndex2 = responseText.indexOf("</title>", 0);
+      //       let errText =
+      //         responseText.substring(titleIndex1, titleIndex2) ||
+      //         xhr.statusText;
+      //       that.errorTips =
+      //         "报错信息： " + errText + "，状态码是：" + xhr.status;
+      //       that.showLoading = false;
+      //     }
+      //   },
+      // });
     },
     // 头部
     _headHandler(val) {

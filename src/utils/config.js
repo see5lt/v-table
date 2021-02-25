@@ -14,9 +14,6 @@ const config = {
 		height:'100%',					//高度
 		width:'100%',					//宽度
 		url:'',  //表格接口
-		params:{},  					//表格参数
-		headers:{},  					//请求头部
-		timeout:0,  					//请求超时时间
 		parsData:{						//将返回的任意数据格式解析成 grid 组件规定的数据格式
 			'code': 'Code',
 			'msg': 'Message',
@@ -32,8 +29,6 @@ const config = {
 		showPage:true,  				//显示分页
 		pageSize:10,  					//每页显示的条数，必须在 page-list属性 中存在
 		pageList:[10, 30, 50, 100],  	//分页的下拉选择框
-		enableAllSort:true,  			//启用所有排序
-		remoteSort:true,  				//是否远程排序-将会在请求添加参数
 		fixedIndexColumn:true,  		//固定索引列和复选框列
 		cellResize:true,  				//允许拖动行大小
 		totalRowHeight:34,  			//汇总行高度

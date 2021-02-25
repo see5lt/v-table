@@ -13,6 +13,7 @@ import methods from '@/utils/methods.js';
 import config from '@/utils/config.js';
 Vue.prototype.$dyMethods = methods;
 Vue.prototype.$dyConfig = config;
+import './assets/layer.css'
 
 import button from '@/packages/vbutton/index.js';
 import vGrig from '@/packages/vgrid/index.js';

@@ -37,7 +37,6 @@ const methods = {
       that.value =  Math.floor( Number(that.value) * Math.pow(10,acc) ) / Math.pow(10,acc);
     }
 	},
-	//转千分号
 	commafy: function(num){
 		if(!Number(num)){ return num;}
 		let decimalPart = '';
@@ -58,7 +57,6 @@ const methods = {
 		if((num+"").trim()==""){ return"";}
 		return (num +'').replace(/\,/ig,'');
 	},
-	// 提示
 	tips(e,title){
     let offset = this.getOffset(e);
     let label = document.createElement("label");

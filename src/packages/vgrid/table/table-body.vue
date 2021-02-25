@@ -374,12 +374,13 @@ export default {
         text.forEach(function (eve) {
           if(eve.btn) {
             eve.btn.forEach(function(e){
-               more += `<li>${e.name}</li>`
+               more += `<li class="dy-more" data-rowindex="${rowKey}" click="${e.click}">  ${e.name}</li>`
             })
           }
+
           html += `
-          		<a class="dy-bar"  style="margin:0 4px;"
-                field="${col.field}"
+              <a class="dy-bar"  style="margin:0 4px;"
+                name=""
                 data-rowindex="${rowKey}"
                 click="${eve.click}"
               ><span>${eve.name}</span>
@@ -559,6 +560,7 @@ export default {
         param = edittype.substring(leftIndex + 1, rightIndex).split(",");
         param = param.map(function (h) {
           let param = "";
+         
           if (row[h] != undefined) {
             param = row[h];
           } else if (h == "rowIndex") {
@@ -686,8 +688,7 @@ export default {
       let that = this;
       let timeoutRowClick = null;
       this.$nextTick(function () {
-        let $body = that.$refs["dy-grid__body"];
-
+        let $body = that.$refs["dy-grid__body"];  
         //ie下因为设置滚动宽度，所以左边冻结列不能显示滚动条，也就不能滚动
         if (!!window.ActiveXObject || "ActiveXObject" in window) {
           if (this.leftFixedColumnLength) {
@@ -861,7 +862,7 @@ export default {
         eventDelegation(
           $body,
           "click",
-          "a.dy-edit-link,a.dy_table_lookup_btn",
+          "a.dy-edit-link,a.dy_table_lookup_btn,a.dy-bar,li.dy-more",
           function (e, el) {
             if (el.getAttribute("click")) {
               let index = el.getAttribute("data-rowindex");

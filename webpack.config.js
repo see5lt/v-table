@@ -72,13 +72,18 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
       }
     ]
   },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname,'./src')
+      '@': path.resolve(__dirname,'./src'),
+      'jquery':'jquery'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -88,7 +93,7 @@ module.exports = {
     overlay: true,
     proxy: {
       '/Api': {//开启代理 配合dev.env.js使用
-				target: 'http://127.0.0.1/admin',
+				target: 'http://localhost:5003',
 				changeOrigin: true,   //允许跨域
 				pathRewrite: {
 					'^/api': ''
@@ -98,7 +103,13 @@ module.exports = {
   },
   performance: {
     hints: false
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery"
+     })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
