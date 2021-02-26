@@ -18,9 +18,9 @@ export default {
         return {
             chunk_guid: '',
             aliyunOss:'1',
-            fileUrl:'//localhost:5003/api/Common/File/Merge',
+            fileUrl:'/api/Common/File/Merge',
             options:{
-                target:'//localhost:5003/api/Common/File/Upload',  //url
+                target:'/api/Common/File/Upload',  //url
                 testChunks:false,                                  //是否开启服务器分片校验
                 chunkSize: 5 * 1024 * 1000,                       // 分块大小
                 headers:{

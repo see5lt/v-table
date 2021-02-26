@@ -24,7 +24,7 @@ export default {
     name:'v-file',
     data() {
         return {
-            fileUrl:'//localhost:5003/api/Common/File/Get',
+            fileUrl:'/api/Common/File/Get',
             dialogVisible:false,
             ismodalClose:false,
             uploadList:false,

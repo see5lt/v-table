@@ -1,6 +1,12 @@
 <template>
   <div class="v-form-content">
-    <div class="v-form-nav">
+    <div
+      :class="{
+        'v-form-nav': tabType == 1 ? true : false,
+        'v-form-cronav': tabType == 2 ? true : false,
+      }"
+      v-if="showTabs"
+    >
       <ul>
         <li
           v-for="(item, index) in this.cols"
@@ -12,7 +18,16 @@
         </li>
       </ul>
     </div>
-    <div class="v-form-wrap" ref="v-form-wrap">
+    <div
+      :class="{
+        'v-form-wrap': true,
+        ntab: showTabs == false ? true : false,
+        htab: showTabs != false ? true : false,
+        htab: tabType != 2 ? true : false,
+        ntab: tabType == 2 ? true : false,
+      }"
+      ref="v-form-wrap"
+    >
       <div
         class="v-form-sub"
         v-for="(item, index) in this.sectionData"
@@ -103,13 +118,12 @@
                 :value.sync="formData[item.field]"
               ></v-lookup>
               <v-file
-                 v-if="item.type == 'file' && item.showtype == '1'"
-                 :fileData="item"
-
+                v-if="item.type == 'file' && item.showtype == '1'"
+                :fileData="item"
               ></v-file>
               <v-showfile
-                 v-if="item.type == 'file' && item.showtype != '1'"
-                 :fileData="item"
+                v-if="item.type == 'file' && item.showtype != '1'"
+                :fileData="item"
               ></v-showfile>
             </div>
           </form>
@@ -130,7 +144,7 @@ import vLookup from "./module/lookup";
 import vFile from "./module/upload/file";
 import vShowfile from "./module/upload/show-file";
 import $ from "jquery";
-import { ajax } from '@/utils/index'
+import { ajax } from "@/utils/index";
 export default {
   name: "form-item",
   data() {
@@ -139,7 +153,7 @@ export default {
       sectionData: this.cols[0].section,
       formData: {},
       flagData: {},
-      body: null
+      body: null,
     };
   },
   components: {
@@ -151,18 +165,22 @@ export default {
     vLookup,
     vInput,
     vFile,
-    vShowfile
+    vShowfile,
   },
   props: {
     cols: {
       type: Array,
     },
+    showTabs: {
+      type: Boolean,
+    },
+    tabType: {
+      type: Number,
+    },
   },
   watch: {
     formData: {
-      handler(val, olval) {
-        
-      },
+      handler(val, olval) {},
       deep: true,
     },
     sectionData: {
@@ -172,10 +190,10 @@ export default {
   created() {
     let data = new Array();
     let cols = this.cols;
-    cols.forEach((e,i) =>{
-       this.bindValue(e.section,name)
-    })
-    
+    cols.forEach((e, i) => {
+      this.bindValue(e.section, name);
+    });
+
     // section.forEach((e) => {
     //   if (e.cell) {
     //     data.push.apply(data, e.cell);
@@ -196,7 +214,7 @@ export default {
   mounted() {
     let mode = this.getQueryString("mode");
     if (mode == 3) this.setAllDisabled(false);
-    this.body = this.$refs['v-form-wrap'];
+    this.body = this.$refs["v-form-wrap"];
   },
   methods: {
     toggle(index, item) {
@@ -205,15 +223,14 @@ export default {
       this.setsoltValue();
 
       console.log(this.formData);
-      this.$nextTick(() =>{
-        for(let k in this.formData){
-        if(this.$refs[k] && this.$refs[k].length >= 1){
-           let ele = this.$refs[k][0];
-           ele.setValue(this.formData[k])
+      this.$nextTick(() => {
+        for (let k in this.formData) {
+          if (this.$refs[k] && this.$refs[k].length >= 1) {
+            let ele = this.$refs[k][0];
+            ele.setValue(this.formData[k]);
+          }
         }
-       }
-      })
-      
+      });
     },
     keyDown() {
       if (event.keyCode == 13) return false;
@@ -224,34 +241,34 @@ export default {
     getData() {
       return this.formData;
     },
-    bindValue(section,name) {
+    bindValue(section, name) {
       let data = new Array();
       let arr = section;
       let obj = new Object();
-      arr.forEach((e) =>{
-         if(e.cell) {
-           data.push.apply(data, e.cell);
-         }
-      })
-      for(let k in data) {
+      arr.forEach((e) => {
+        if (e.cell) {
+          data.push.apply(data, e.cell);
+        }
+      });
+      for (let k in data) {
         if (
-        data[k].field &&
-        data[k].type != "blank" &&
-        data[k].needsave != "false"
-      ) {
-        this.formData[data[k].field] = "";
+          data[k].field &&
+          data[k].type != "blank" &&
+          data[k].needsave != "false"
+        ) {
+          this.formData[data[k].field] = "";
+        }
       }
-     }
     },
     setsoltValue() {
       this.$emit("slotValue", this.sectionData);
     },
     setValue(key, val) {
       this.$set(this.formData, key, val);
-      if(this.$refs[key] && this.$refs[key].length >= 1){
-           let ele = this.$refs[key][0];
-           ele.setValue(val)
-        }
+      if (this.$refs[key] && this.$refs[key].length >= 1) {
+        let ele = this.$refs[key][0];
+        ele.setValue(val);
+      }
     },
     getQueryString(name) {
       let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -291,30 +308,30 @@ export default {
         id: oid,
         clumnName: param.key,
       };
-     
+
       if (mode && mode != 1) {
-        ajax.post(url,params,function(res){
-             if (res.Data) {
-              that.formData = Object.assign(that.formData, res.Data);
-            }
-            for (let k in that.formData) {
-              that.setValue(k, that.formData[k]);
-            }
-        })
+        ajax.post(url, params, function (res) {
+          if (res.Data) {
+            that.formData = Object.assign(that.formData, res.Data);
+          }
+          for (let k in that.formData) {
+            that.setValue(k, that.formData[k]);
+          }
+        });
       }
     },
     setDisabled(key, val) {
-      if(this.$refs[key] && this.$refs[key].length >= 1){
-           let ele = this.$refs[key][0];
-           ele.setDisabled(val);
-       }
+      if (this.$refs[key] && this.$refs[key].length >= 1) {
+        let ele = this.$refs[key][0];
+        ele.setDisabled(val);
+      }
     },
     setAllDisabled(bool) {
       for (let k in this.formData) {
-        if(this.$refs[k] && this.$refs[k].length >= 1){
-           let ele = this.$refs[k][0];
-           ele.setDisabled(bool);
-       }
+        if (this.$refs[k] && this.$refs[k].length >= 1) {
+          let ele = this.$refs[k][0];
+          ele.setDisabled(bool);
+        }
       }
     },
     save(param, data) {
@@ -343,11 +360,11 @@ export default {
         fields.push(filter);
       }
       params.Fields = fields;
-      ajax.post(url,params,function(res) {
-         if (mode == 1) {
-            let url = that.changeURLArg({ mode: 2, oid: res.Data });
-          }
-      })
+      ajax.post(url, params, function (res) {
+        if (mode == 1) {
+          let url = that.changeURLArg({ mode: 2, oid: res.Data });
+        }
+      });
       // $.ajax({
       //   url: url,
       //   type: "post",
@@ -358,7 +375,7 @@ export default {
       //     }
       //   },
       // });
-    }
+    },
   },
 };
 </script>

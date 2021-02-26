@@ -19,12 +19,17 @@
     </form-header>
     <!-- 内容区域 -->
 
-    <form-item :cols="cols" ref="form-item" @slotValue="getChildSlot" >
+    <form-item
+      :cols="cols"
+      ref="form-item"
+      @slotValue="getChildSlot"
+      :showTabs="showTabs"
+      :tabType="tabType"
+    >
       <template v-for="item in this.slotArray" :slot="item.id">
         <slot :name="item.id"></slot>
       </template>
     </form-item>
-    
   </div>
 </template>
 
@@ -57,6 +62,14 @@ export default {
     entity: [String],
     url: [String],
     keys: [String],
+    showTabs: {
+      type: Boolean,
+      default: true,
+    },
+    tabType: {
+      type:Number,
+      default: 1 
+    },
     showMessage: {
       type: Boolean,
       default: true,
@@ -121,7 +134,7 @@ export default {
     },
     labelWidth: String,
   },
-  created() {},
+  created() {console.log(this.tabType)},
   methods: {
     validate(props) {
       let fields = this.fields;
@@ -204,26 +217,25 @@ export default {
     setDisabled(key, bool) {
       let form = this.$refs["form-item"];
       let flag;
-      bool ? flag = bool : flag = false;
+      bool ? (flag = bool) : (flag = false);
       form.setDisabled(key, flag);
     },
-    setAllDisabled(){
+    setAllDisabled() {
       let form = this.$refs["form-item"];
       form.setAllDisabled(false);
     },
     beforeSave() {},
     save(data) {
       let param = {
-        url: "http://localhost:5003/api/Common/Form/Save",
+        url: "/api/Common/Form/Save",
         entity: this.entity,
         key: this.keys,
       };
       this.$refs["form-item"].save(param, data);
     },
     loadData(data) {
-     
       let param = {
-        url: "http://localhost:5003/api/Common/Form/Get",
+        url: "/api/Common/Form/Get",
         entity: this.entity,
         key: this.keys,
       };

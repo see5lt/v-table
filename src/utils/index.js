@@ -1,5 +1,6 @@
 
 import layer from './layer'
+
 window.$ = $;
 
 $.isScrollFixed = function(el, options) {
@@ -964,47 +965,6 @@ export function delcommafy(num){
  if((num+"").trim()==""){ return"";}
  return (num +'').replace(/\,/ig,'');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const ajax = {
     get: function (url, params, successFn, opt) {
